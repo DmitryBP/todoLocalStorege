@@ -3,10 +3,12 @@ import Task from './task';
 export default class StateManager {
   key: string;
   state;
+  id: number;
 
   constructor() {
     this.key = 'tasks';
     this.state = this.loadState();
+    this.id = 0
   }
 
   saveState() {
@@ -21,12 +23,12 @@ export default class StateManager {
   update(list: HTMLElement) {
     this.state.forEach((savedTask) => {
       console.log(savedTask)
-      list.append(new Task(this, '#').node);
+      list.append(new Task(this, '#' + this.id++).node);
     });
     // localStorage.clear()
   }
 
-  addTask(task: {id: number}) {
+  addTask(task) {
     this.state.push(task);
     this.saveState();
   }
