@@ -1,14 +1,16 @@
+import Task from './task';
+
 export default class StateManager {
   key: string;
-  state: string[];
+  state;
 
   constructor() {
-    this.state = this.loadState();
     this.key = 'tasks';
+    this.state = this.loadState();
   }
 
   saveState() {
-    localStorage.setItem(this.key, JSON.stringify(this.loadState()));
+    localStorage.setItem(this.key, JSON.stringify(this.state));
   }
 
   loadState() {
@@ -16,8 +18,16 @@ export default class StateManager {
     return savedData ? JSON.parse(savedData) : [];
   }
 
+  update(list: HTMLElement) {
+    this.state.forEach((savedTask) => {
+      console.log(savedTask)
+      list.append(new Task(this, '#').node);
+    });
+    // localStorage.clear()
+  }
 
-  addTask(text: string) {
-    this.state.push(text);
+  addTask(task: {id: number}) {
+    this.state.push(task);
+    this.saveState();
   }
 }

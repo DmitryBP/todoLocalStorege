@@ -5,19 +5,18 @@ import StateManager from './state-manager';
 import TaskInput from './task-input';
 
 export default class Task extends ListItem {
-  state: StateManager;
   input: Input;
+  deleteButton: DeleteButton;
 
   constructor(state: StateManager, text: string) {
     super(state, text);
 
-    this.state = state;
-    this.input = new TaskInput(this.state)
+    this.input = new TaskInput(state);
+    this.deleteButton = new DeleteButton(state);
     this.fillItem();
   }
 
   fillItem() {
-    const deleteButton = new DeleteButton(this.state).node;
-    this.node.append(this.input.node, deleteButton);
+    this.node.append(this.input.node, this.deleteButton.node);
   }
 }

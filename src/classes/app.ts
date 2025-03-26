@@ -16,7 +16,10 @@ export default class App {
   }
 
   appInit() {
-    console.log(this.state.loadState())
+    console.log(this.state.loadState());
+    
+    this.state.update(this.list.node);
+
     document.body.append(this.title.node, this.list.node, this.addButton.node);
   }
 }

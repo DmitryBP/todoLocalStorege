@@ -1,9 +1,11 @@
 import Button from './button';
 import StateManager from './state-manager';
+import Task from './task';
 
 export default class AddButton extends Button {
   state: StateManager;
   list: HTMLElement;
+  id: number;
 
   constructor(state: StateManager, list: HTMLElement) {
     super(state, 'Add');
@@ -13,12 +15,17 @@ export default class AddButton extends Button {
     this.clickHandler();
   }
 
+  idCounter(){
+    return this.id++;
+  }
+
   clickHandler() {
     this.node.addEventListener('click', () => {
-      this.list.append('test');
-      this.state.addTask('test');
+      this.list.append(new Task(this.state, `${1}`).node);
+      this.state.addTask({ id: 1 });
       this.state.saveState();
-      console.log(this.state)
+
+      console.log(this.state);
     });
   }
 }

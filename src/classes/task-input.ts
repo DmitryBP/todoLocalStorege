@@ -12,7 +12,7 @@ export default class TaskInput extends Input {
 
   changeHandler() {
     this.node.addEventListener('change', () => {
-      this.state.editTask('test')
+      // this.state.editTask('test')
       this.setValue(''); 
     })
   }
